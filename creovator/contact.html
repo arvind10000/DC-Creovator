@@ -136,58 +136,63 @@
           <h3 style="font-size:1.4rem;font-weight:800;margin-bottom:8px;">Start a conversation</h3>
           <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:32px;">We'll get back to you within 24 hours.
           </p>
-          <form id="contactForm">
-            <div class="form-row">
-              <div class="form-group">
-                <label class="form-label">First Name</label>
-                <input type="text" class="form-input" placeholder="Anika" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Last Name</label>
-                <input type="text" class="form-input" placeholder="Nair" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Work Email</label>
-              <input type="email" class="form-input" placeholder="you@company.com" required />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Company</label>
-              <input type="text" class="form-input" placeholder="Your Company" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">What are you looking for?</label>
-              <select class="form-select form-input">
-                <option value="">Select a service…</option>
-                <option>Brand Strategy</option>
-                <option>Performance Marketing</option>
-                <option>Social Media Management</option>
-                <option>Content Creation</option>
-                <option>SEO & Growth</option>
-                <option>Full-Service Partnership</option>
-                <option>Something else</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Tell us about your project</label>
-              <textarea class="form-textarea"
-                placeholder="Share your goals, timeline, and any context that'll help us understand what you need…"
-                required></textarea>
-            </div>
-            <div class="form-group" style="margin-bottom:24px;">
-              <label class="form-label">Budget range</label>
-              <select class="form-select form-input">
-                <option value="">Select a range…</option>
-                <option>Under ₹5L / month</option>
-                <option>₹5L – ₹15L / month</option>
-                <option>₹15L – ₹50L / month</option>
-                <option>₹50L+ / month</option>
-                <option>Project-based — let's discuss</option>
-              </select>
-            </div>
-            <input type="hidden" name="_captcha" value="false">
-            <button type="submit" class="form-submit">Send Message →</button>
-          </form>
+          
+    <form action="https://formspree.io/f/mreypgwv" method="POST" id="contactForm">
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">First Name</label>
+      <input type="text" name="first_name" class="form-input" placeholder="Anika" required />
+    </div>
+    <div class="form-group">
+      <label class="form-label">Last Name</label>
+      <input type="text" name="last_name" class="form-input" placeholder="Nair" required />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Work Email</label>
+    <input type="email" name="email" class="form-input" placeholder="you@company.com" required />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Company</label>
+    <input type="text" name="company" class="form-input" placeholder="Your Company" />
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">What are you looking for?</label>
+    <select name="service" class="form-select form-input">
+      <option value="">Select a service…</option>
+      <option>Brand Strategy</option>
+      <option>Performance Marketing</option>
+      <option>Social Media Management</option>
+      <option>Content Creation</option>
+      <option>SEO & Growth</option>
+      <option>Full-Service Partnership</option>
+      <option>Something else</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Tell us about your project</label>
+    <textarea name="message" class="form-textarea" placeholder="Share your goals..." required></textarea>
+  </div>
+
+  <div class="form-group" style="margin-bottom:24px;">
+    <label class="form-label">Budget range</label>
+    <select name="budget" class="form-select form-input">
+      <option value="">Select a range…</option>
+      <option>Under ₹5L / month</option>
+      <option>₹5L – ₹15L / month</option>
+      <option>₹15L – ₹50L / month</option>
+      <option>₹50L+ / month</option>
+      <option>Project-based — let's discuss</option>
+    </select>
+  </div>
+
+  <input type="hidden" name="_captcha" value="false">
+  <button type="submit" class="form-submit">Send Message →</button>
+</form>
         </div>
       </div>
     </div>
