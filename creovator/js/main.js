@@ -147,20 +147,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ── Contact Form ── */
   const form = document.querySelector('.contact-form form');
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const btn = form.querySelector('.form-submit');
-      const original = btn.textContent;
-      btn.textContent = '✓ Message Sent!';
-      btn.style.background = '#10B981';
-      setTimeout(() => {
-        btn.textContent = original;
-        btn.style.background = '';
-        form.reset();
-      }, 3000);
-    });
-  }
+
+if (form) {
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.form-submit');
+    const original = btn.textContent;
+
+    // 1. Send the data to the email service
+    const formData = new FormData(form);
+    
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        // 2. Show success visual feedback (Your original code)
+        btn.textContent = '✓ Message Sent!';
+        btn.style.background = '#10B981';
+        
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.style.background = '';
+          form.reset();
+        }, 3000);
+      } else {
+        btn.textContent = 'Error sending...';
+      }
+    } catch (error) {
+      btn.textContent = 'Network Error';
+    }
+  });
+}
 
   /* ── Custom Cursor (desktop only) ── */
   if (window.innerWidth > 768) {

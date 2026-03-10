@@ -270,9 +270,9 @@
       <div>
         <h4 class="footer-col-title">Social</h4>
         <div class="footer-links">
-          <a href="#">Instagram</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">YouTube</a>
+          <a href="https://www.instagram.com/creovator?igsh=OXBsZ3kzbTA1ajYy">Instagram</a>
+          <a href="https://www.facebook.com/profile.php?id=61585039631666">facebook</a>
+          <a href="https://youtube.com/@creovator?si=en18l-AOVyJAB-B3">YouTube</a>
         </div>
       </div>
 
@@ -303,32 +303,61 @@
   <script src="js/animations.js"></script>
   <script>
 
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxKKJQw7jxKqAk0DSx0wa0YMZk5xguHDeBuqZikKoyZDrxyhYApgYYTIXTNLXW-8G0/exec";
-    const form = document.getElementById("contactForm");
+   const form = document.getElementById('contactForm');
+const scriptURL = 'https://formspree.io/f/mreyelaj';
 
-    form.addEventListener("submit", e => {
-      e.preventDefault();
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      const formData = new FormData(form);
+    const btn = form.querySelector('.form-submit');
+    const originalText = btn.textContent;
 
-      fetch(scriptURL, {
+    // 1. Visual loading state
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    // 2. Prepare the data from your input "name" attributes
+    const formData = new FormData(form);
+
+    try {
+      // 3. Send the data to Formspree
+      const response = await fetch(scriptURL, {
         method: "POST",
-        body: JSON.stringify(Object.fromEntries(formData)),
+        body: formData,
         headers: {
-          "Content-Type": "application/json"
+          'Accept': 'application/json'
         }
-      })
-        .then(response => {
-          alert("Message sent successfully!");
-          form.reset();
-        })
-        .catch(error => {
-          alert("Something went wrong.");
-          console.error(error);
-        });
+      });
 
-    });
+      if (response.ok) {
+        // 4. Success feedback (matches your professional styling)
+        btn.textContent = '✓ Message Sent!';
+        btn.style.backgroundColor = '#10B981'; // Success Green
+        form.reset();
 
+        // Reset button back to original state after 3 seconds
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.backgroundColor = '';
+          btn.disabled = false;
+        }, 3000);
+      } else {
+        // 5. Handle server errors
+        const data = await response.json();
+        alert(data.errors ? data.errors[0].message : "Something went wrong.");
+        btn.textContent = originalText;
+        btn.disabled = false;
+      }
+    } catch (error) {
+      // 6. Handle network errors
+      alert("Network error. Please check your connection.");
+      btn.textContent = originalText;
+      btn.disabled = false;
+      console.error(error);
+    }
+  });
+}
   </script>
 </body>
 
